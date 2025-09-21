@@ -32,6 +32,7 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
     def create_superuser(self, email, password=None, **extra_fields):
         """管理者（スーパーユーザー）を作成します。
 
@@ -73,3 +74,25 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+
+def get_display_name(self) -> str:
+    # SNSプロフィールのニックネーム
+    if hasattr(self, 'sns_profile') and self.sns_profile.nickname:
+        return self.sns_profile.nickname
+
+    # EmployeeProfile
+    if hasattr(self, 'employee_profile'):
+        ep = self.employee_profile
+        if ep.firstname or ep.lastname:
+            return f"{ep.firstname} {ep.lastname}".strip()
+
+    # CustomerProfile
+    if hasattr(self, 'customer_profile'):
+        cp = self.customer_profile
+        if cp.firstname or cp.lastname:
+            return f"{cp.firstname} {cp.lastname}".strip()
+
+    # 最終的にメールアドレス
+    return self.email
+

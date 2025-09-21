@@ -1,3 +1,5 @@
+# rest_template_backend/accounts/models/employee_profile.py
+
 from django.db import models
 from django.conf import settings
 
@@ -13,6 +15,8 @@ class EmployeeProfile(models.Model):
         on_delete=models.CASCADE,
         related_name="employee_profile",
     )
+    firstname = models.CharField("名", max_length=50)
+    lastname = models.CharField("姓", max_length=50)
     department = models.CharField("部署", max_length=100, blank=True, null=True)
     position = models.CharField("役職", max_length=100, blank=True, null=True)
     hire_date = models.DateField("入社日", blank=True, null=True)
@@ -23,9 +27,11 @@ class EmployeeProfile(models.Model):
         help_text="保有している資格をカンマ区切りなどで入力",
     )
 
+
     class Meta:
         verbose_name = "従業員プロフィール"
         verbose_name_plural = "従業員プロフィール"
+
 
     def __str__(self):
         return f"{self.user.get_display_name()}（{self.department or '部署未設定'}）"
