@@ -1,4 +1,16 @@
-# rest_template_backend/accounts/serializers.py
+"""
+accounts.api.serializers
+---------------------------
+ユーザー登録（サインアップ）用のシリアライザを定義するモジュール。
+
+- BaseSignupSerializer: email + password を基本とする共通処理
+- CustomerSignupSerializer: 顧客用（現状は email, password のみ）
+- EmployeeSignupSerializer: 従業員用（部署・役職・入社日・資格情報を追加）
+- SNSSignupSerializer: SNSユーザー用（ニックネーム・自己紹介を追加）
+
+今後、用途に応じたサインアップ処理を拡張する際の基盤となる。
+"""
+
 
 from rest_framework import serializers
 from django.contrib.auth import get_user_model

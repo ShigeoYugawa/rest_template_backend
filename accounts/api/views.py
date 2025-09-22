@@ -1,7 +1,5 @@
-# rest_template_backend/accounts/views.py
-
 """
-accounts.views モジュール
+accounts.api.views モジュール
 
 ユーザー登録と認証機能
 
@@ -34,8 +32,8 @@ from .serializers import (
     EmployeeSignupSerializer,
     SNSSignupSerializer,
 )
-from .models import CustomerProfile, EmployeeProfile, SNSProfile
-from .email_service import send_activation_email
+from ..models import CustomerProfile, EmployeeProfile, SNSProfile
+from ..email_service import send_activation_email
 
 User = get_user_model()
 
